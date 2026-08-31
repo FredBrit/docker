@@ -28,3 +28,46 @@ docker rmi -f 5edf6kh (принудительно)
 docker rm pupupu
 
 
+### docker compose
+
+# Поднять все связанные контейнеры в фоновом режиме, запустить сборку образа, сети и тд
+# Нужно находиться в директории где присутствует docker-compose.yml
+docker compose up --build -d
+
+# --force-recreate гарантирует, что контейнеры пересоздадутся даже если Docker решит, что они "не изменились".
+docker compose up -d --build --force-recreate
+
+# Логи конкретного контейнера
+docker compose logs -f booking_back_service
+
+# Зайти внутрь работающего контейнера (как ssh)
+docker compose exec booking_back_service bash
+
+# Перезапустить только один сервис (не трогая остальные)
+docker compose restart booking_celery_worker_service
+
+# Останавливает контейнеры, но не удаляет их
+# Контейнеры остаются в системе, сеть остается, volumes с данными остаются.
+docker compose stop
+
+# После этого можно без пересборки поднять контейнеры
+docker compose start
+ИЛИ
+docker compose up -d
+
+# Аккуратно разобрать контейнеры
+# Останавливает контейнеры и удаляет их, а также удаляет сеть. 
+# Но volumes (данные БД) остаются нетронутыми.
+docker compose down
+
+# То же самое, что down, но удаляет еще и volumes. 
+# Это значит, что вся база данных будет удалена.
+docker compose down -v
+
+# Удаляет контейнеры, сеть и собранные Docker-образы вашего проекта.
+docker compose down --rmi all
+
+# Удаляет всё: контейнеры, сеть, volumes (данные БД) и образы.
+docker compose down -v --rmi all
+
+
