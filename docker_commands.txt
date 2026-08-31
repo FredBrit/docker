@@ -17,4 +17,14 @@ docker run -p 8888:8000 pupupu (левый порт это порт, по кот
 # В дальнейшем его можно запускать сразу
 docker pull redis:7.4
 
+# Остановить контейнер
+docker stop pupupu
+
+# Удалить образ
+docker rmi 5edf6kh
+docker rmi -f 5edf6kh (принудительно)
+
+# Удалить контейнер
+docker rm pupupu
+
 
