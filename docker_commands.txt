@@ -47,6 +47,7 @@ docker network prune
 docker builder prune
 
 
+
 # Показать только запущенные в данный момент контейнеры
 docker ps
 
